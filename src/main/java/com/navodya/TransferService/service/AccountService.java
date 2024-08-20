@@ -26,22 +26,13 @@ public class AccountService {
         return new ResponseEntity<>(new ArrayList<>(), HttpStatus.BAD_REQUEST);
 	}
 
-	public org.springframework.http.ResponseEntity<String> addAccount(
-		try {
-        	int maxAppointmentNumber = appointmentDao.findMaxAppointmentNumberByScheduleId(appointment.getScheduleId());
-            appointment.setAppointmentNumber(maxAppointmentNumber + 1);
-            appointmentDao.save(appointment);
-            return new ResponseEntity<>("success", HttpStatus.CREATED);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>("error", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+	public ResponseEntity<String> addAccount(AccountModel accountModel){
+		accountDao.save(accountModel);
+		return new ResponseEntity<>("success",HttpStatus.CREATED);
 	}
 
-	public org.springframework.http.ResponseEntity<java.util.List<com.navodya.TransferService.model.AccountModel>> getAccountByAccountId(
-			Integer accountId) {
-		// TODO Auto-generated method stub
-		return null;
+	public AccountModel getAccountByAccountId(Integer accountId) {
+		return accountDao.findById(accountId).orElse(null);
 	}
 
 }

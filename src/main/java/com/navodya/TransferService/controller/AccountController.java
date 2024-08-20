@@ -37,7 +37,7 @@ public class AccountController {
     
     //get account by account id
     @GetMapping("getaccount/{accountId}")
-    public ResponseEntity<List<AccountModel>> getAccountByAccountId(@PathVariable Integer accountId){
+    public AccountModel getAccountByAccountId(@PathVariable Integer accountId){
         return accountService.getAccountByAccountId(accountId);
     }
 }
